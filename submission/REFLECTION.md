@@ -20,3 +20,11 @@ Answer briefly, in your own words. This is graded on reasoning, not length.
    one where the graph is overkill.
 
 _Write your answers below._
+
+1. Bước dễ hỏng âm thầm nhất là chuẩn hóa trace thành Bronze/dataset: sai schema, sai role, mất timestamp hoặc đảo chosen/rejected vẫn có thể chạy được nhưng tạo dữ liệu học sai. Phát hiện bằng cách kiểm tra contract, thống kê phân phối, sample audit thủ công và so sánh tỉ lệ lỗi/độ dài/role qua từng batch.
+
+2. Nếu bỏ decontamination, model sẽ học trực tiếp prompt của eval. Điểm eval tăng giả vì nó đã thấy câu hỏi hoặc preference tương tự, không phải vì tổng quát hóa tốt hơn. Metrics sẽ có train-eval gap bất thường: eval win-rate/accuracy cao nhưng prompt mới hoặc holdout sạch giảm.
+
+3. Trong hệ thống CRM, feature "tổng số lần mua trong 30 ngày sau đăng ký" rất nguy hiểm nếu join vào dòng dự đoán churn tại ngày đăng ký. Nó có chứa kết quả cần dự đoán ở tương lai, nên cần ASOF theo thời điểm dự đoán.
+
+4. Graph trả lời tốt câu multi-hop: "widget ship from where?" vì nối được widget -> accessory -> Hanoi. Vector chunk retrieval phẳng khó vì không chunk nào chứa cả hai fact. Ngược lại, hỏi đoạn văn có nhắc chính sách đổi trả hoặc embedding/chunk text nào gần nhất thì graph là quá mức cần thiết.
